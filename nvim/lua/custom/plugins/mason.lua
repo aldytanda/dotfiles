@@ -151,17 +151,10 @@ return {
     --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
     --  - settings (table): Override the default settings passed when initializing the server.
     --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+
     local servers = {
       -- clangd = {},
-      gopls = {
-        settings = {
-          gopls = {
-            gofumpt = true,
-            -- ['formatting.gofumpt'] = true,
-            -- ['formatting.tabWidth'] = 4, -- set tab width to 4
-          },
-        },
-      },
+
       -- pyright = {},
       -- rust_analyzer = {},
       -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -188,6 +181,22 @@ return {
         },
       },
     }
+
+    -- load locally configured variables (e.g. to disable certain lsp that is not installed in local machine)
+    local local_conf = require 'custom.local_config' or { enable_gopls = false }
+
+    -- gopls conditionally installed based on local config
+    if local_conf.enable_gopls then
+      servers.gopls = {
+        settings = {
+          gopls = {
+            gofumpt = true,
+            -- ['formatting.gofumpt'] = true,
+            -- ['formatting.tabWidth'] = 4, -- set tab width to 4
+          },
+        },
+      }
+    end
 
     -- Ensure the servers and tools above are installed
     --  To check the current status of installed tools and/or manually install

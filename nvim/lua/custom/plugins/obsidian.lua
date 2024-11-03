@@ -1,3 +1,9 @@
+local local_config = require 'custom.local_config' or {}
+
+if not local_config.obsidian_vaults or #local_config.obsidian_vaults == 0 then
+  return {}
+end
+
 return {
   'epwalsh/obsidian.nvim',
   version = '*',
@@ -7,14 +13,7 @@ return {
     'nvim-lua/plenary.nvim',
   },
   opts = {
-    workspaces = {
-      {
-        name = 'Gesang',
-        path = '/Users/aldy/Google Drive/My Drive/Obsidian Vault/gesang',
-      },
-    },
-    ui = {
-      enable = true,
-    },
+    ui = { enable = true },
+    workspaces = local_config.obsidian_vaults,
   },
 }
