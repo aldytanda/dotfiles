@@ -198,6 +198,21 @@ return {
       }
     end
 
+    -- rust_analyzer conditionally installed based on local config
+    if local_conf.enable_rust_analyzer then
+      servers.rust_analyzer = {
+        settings = {
+          ['-rust_analyzer'] = {
+            diagnostics = {
+              enable = false,
+            },
+            -- ['formatting.gofumpt'] = true,
+            -- ['formatting.tabWidth'] = 4, -- set tab width to 4
+          },
+        },
+      }
+    end
+
     -- Ensure the servers and tools above are installed
     --  To check the current status of installed tools and/or manually install
     --  other tools, you can run
