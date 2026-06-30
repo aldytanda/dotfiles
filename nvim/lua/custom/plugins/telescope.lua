@@ -8,7 +8,7 @@
 return { -- Fuzzy Finder (files, lsp, etc)
   'nvim-telescope/telescope.nvim',
   event = 'VimEnter',
-  branch = '0.1.x',
+  branch = 'master',
   dependencies = {
     'nvim-lua/plenary.nvim',
     { -- If encountering errors, see telescope-fzf-native README for installation instructions
@@ -93,6 +93,11 @@ return { -- Fuzzy Finder (files, lsp, etc)
         previewer = false,
       })
     end, { desc = '[/] Fuzzily search in current buffer' })
+
+    -- Aldy added on 21 May 2026
+    vim.keymap.set('n', '<leader>sa', function()
+      builtin.find_files { no_ignore = true, hidden = true }
+    end, { desc = 'Search [A]ll files including gitignored and hidden' })
 
     -- It's also possible to pass additional configuration options.
     --  See `:help telescope.builtin.live_grep()` for information about particular keys

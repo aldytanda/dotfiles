@@ -8,6 +8,7 @@ require 'custom.opt'
 
 -- custom keymap config file [aldy oct 24]
 require 'custom.keymaps'
+require 'custom.autoload'
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
